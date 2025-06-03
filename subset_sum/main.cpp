@@ -1,54 +1,38 @@
-#include "subset_sum.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iomanip>
+#include "SubsetSum.h"
 
 using namespace std;
 
 int main() {
-    cout << "=== å­é›†å’Œé—®é¢˜æ±‚è§£å™¨ - å›žæº¯æ³• ===" << endl;
-    cout << "ç®—æ³•è®¾è®¡ä¸Žåˆ†æžè¯¾ç¨‹ä½œä¸š" << endl;
-    cout << "ä½¿ç”¨Florida State Universityæ•°æ®é›†" << endl;
+    int c, n;
     
-    SubsetSumSolver solver;
-    
-    // æµ‹è¯•P01é—®é¢˜ï¼ˆå°è§„æ¨¡ï¼Œé€‚åˆæ¼”ç¤ºï¼‰
-    cout << "\n>>> æµ‹è¯•é—®é¢˜P01 <<<" << endl;
-    if (solver.loadProblem("../4.2 Florida State University/p01_w.txt", 
-                          "../4.2 Florida State University/p01_c.txt")) {
-        solver.solve();
-        solver.printResults();
-        solver.checkSolution("../4.2 Florida State University/p01_s.txt");
+    // ¶ÁÈ¡Ä¿±êºÍcºÍÔªËØ¸öÊýn
+    cout << "ÇëÊäÈëÄ¿±êºÍcºÍÔªËØ¸öÊýn: ";
+    cin >> c >> n;
+    // ¶ÁÈ¡n¸öÕûÊý
+    vector<int> weights(n);
+    cout << "ÇëÊäÈë" << n << "¸öÕûÊý: ";
+    for (int i = 0; i < n; i++) {
+        cin >> weights[i];
     }
-    
-    // æµ‹è¯•P04é—®é¢˜
-    cout << "\n\n>>> æµ‹è¯•é—®é¢˜P04 <<<" << endl;
-    SubsetSumSolver solver2;
-    if (solver2.loadProblem("../4.2 Florida State University/p04_w.txt", 
-                           "../4.2 Florida State University/p04_c.txt")) {
-        solver2.solve();
-        solver2.printResults();
-        solver2.checkSolution("../4.2 Florida State University/p04_s.txt");
+    // ÏÔÊ¾ÊäÈëµÄÊý¾Ý
+    cout << "\nÊäÈëÊý¾Ý:" << endl;
+    cout << "Ä¿±êºÍ: " << c << endl;
+    cout << "ÔªËØ: ";
+    for (int i = 0; i < n; i++) {
+        cout << weights[i] << " ";
     }
-    
-    // æµ‹è¯•P06é—®é¢˜ï¼ˆå¾ˆå°çš„é—®é¢˜ï¼Œå®¹æ˜“ç†è§£ï¼‰
-    cout << "\n\n>>> æµ‹è¯•é—®é¢˜P06 <<<" << endl;
-    SubsetSumSolver solver3;
-    if (solver3.loadProblem("../4.2 Florida State University/p06_w.txt", 
-                           "../4.2 Florida State University/p06_c.txt")) {
-        solver3.solve();
-        solver3.printResults();
-        solver3.checkSolution("../4.2 Florida State University/p06_s.txt");
-    }
-    
-    cout << "\n=== ç®—æ³•æ€»ç»“ ===" << endl;
-    cout << "1. å›žæº¯æ³•ï¼šç³»ç»Ÿåœ°å°è¯•æ‰€æœ‰å¯èƒ½çš„é€‰æ‹©" << endl;
-    cout << "2. å‰ªæžä¼˜åŒ–ï¼š" << endl;
-    cout << "   - å½“å‰å’Œè¶…è¿‡ç›®æ ‡å€¼æ—¶åœæ­¢æœç´¢" << endl;
-    cout << "   - å½“æ— æ³•å¾—åˆ°æ›´å¥½è§£æ—¶åœæ­¢æœç´¢" << endl;
-    cout << "3. æ—¶é—´å¤æ‚åº¦ï¼šO(2^n) æœ€åæƒ…å†µ" << endl;
-    cout << "4. ç©ºé—´å¤æ‚åº¦ï¼šO(n) é€’å½’æ ˆç©ºé—´" << endl;
-    
-    cout << "\nç¼–è¯‘è¿è¡Œæ–¹æ³•ï¼š" << endl;
-    cout << "g++ -o subset_sum subset_sum.cpp main.cpp" << endl;
-    cout << "./subset_sum" << endl;
-    
+    cout << endl;
+    // ´´½¨SubsetSum¶ÔÏó²¢Çó½â
+    SubsetSum subsetSum(c, weights);
+    cout << "\nÕýÔÚÇó½â..." << endl;
+    subsetSum.solve();
+    // Êä³öÎÄ¼þÃû£¬¿ÉÒÔ¸ù¾ÝÐèÒªÐÞ¸Ä
+    string filename = "p01_s_self.txt";
+    // Êä³ö½á¹ûµ½ÎÄ¼þ
+    subsetSum.outputToFile(filename);
     return 0;
 }
